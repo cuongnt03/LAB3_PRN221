@@ -1,0 +1,43 @@
+﻿@page
+@model LAB3.Pages.admin.products.CreateModel
+@{
+}
+<div class="text-center">
+    <h1 class="display-4">Admin Create</h1>
+    <form method="post">
+        <label for="ProductName" >Product Name:</label>
+        <input type="text" id="ProductName" name="ProductName" class="form-control"><br>
+@* 
+        <label for="CategoryId">Category ID:</label>
+        <input type="number" id="CategoryId" name="CategoryId"><br> *@
+
+        <label >Category Name</label>
+        <select name="CategoryId" class="form-control">
+            <option value="">Select Category</option>
+            @foreach (var category in Model.listCategory)
+            {
+                <option value="@category.CategoryId">@category.CategoryName</option>
+            }
+        </select>
+
+        <label for="QuantityPerUnit">Quantity Per Unit:</label>
+        <input type="text" id="QuantityPerUnit" name="QuantityPerUnit"><br>
+
+        <label for="UnitPrice">Unit Price:</label>
+        <input type="text" id="UnitPrice" name="UnitPrice"><br>
+
+        <label for="UnitsInStock">Units In Stock:</label>
+        <input type="number" id="UnitsInStock" name="UnitsInStock"><br>
+
+        <label for="UnitsOnOrder">Units On Order:</label>
+        <input type="number" id="UnitsOnOrder" name="UnitsOnOrder"><br>
+
+        <label for="ReorderLevel">Reorder Level:</label>
+        <input type="number" id="ReorderLevel" name="ReorderLevel"><br>
+
+        <label for="Discontinued">Discontinued:</label>
+        <input type="checkbox" id="Discontinued" name="Discontinued"><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>

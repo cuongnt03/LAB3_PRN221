@@ -1,0 +1,38 @@
+﻿@page "{id:int}"
+@model LAB3.Pages.Admin.Products.EditModel
+<div class="text-center">
+    <h1 class="display-4">Admin Create</h1>
+    <form method="post">
+        <label for="ProductName">ProductName</label>
+        <input type="text" id="ProductName" name="ProductName" value="@Model.listProduct.ProductName"><br>
+
+        <label>Category Name</label>
+        <select name="CategoryId" class="form-control">
+            <option value="@Model.listProduct.CategoryId">@Model.listProduct.Category.CategoryName</option>
+            @foreach (var category in Model.listCategory)
+            {
+                <option value="@category.CategoryId">@category.CategoryName</option>
+            }
+        </select>
+
+        <label for="QuantityPerUnit">QuantityPerUnit</label>
+        <input type="text" id="QuantityPerUnit" name="QuantityPerUnit" value="@Model.listProduct.QuantityPerUnit"><br>
+
+        <label for="UnitPrice">UnitPrice</label>
+        <input type="number" id="UnitPrice" name="UnitPrice" value="@Model.listProduct.UnitPrice"><br>
+
+        <label for="UnitsInStock">UnitsInStock</label>
+        <input type="number" id="UnitsInStock" name="UnitsInStock" value="@Model.listProduct.UnitsInStock"><br>
+
+        <label for="UnitsOnOrder">UnitsOnOrder</label>
+        <input type="number" id="UnitsOnOrder" name="UnitsOnOrder" value="@Model.listProduct.UnitsOnOrder"><br>
+
+        <label for="ReorderLevel">ReorderLevel</label>
+        <input type="number" id="ReorderLevel" name="ReorderLevel" value="@Model.listProduct.ReorderLevel"><br>
+
+        <label for="Discontinued">Discontinued</label>
+        <input type="checkbox" id="Discontinued" name="Discontinued" value="@Model.listProduct.Discontinued"><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
