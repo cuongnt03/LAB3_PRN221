@@ -3,3 +3,56 @@
 @{
 }
 <h1>This is Admin Page</h1>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <form method="post" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchString">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ProductId</th>
+                <th scope="col">ProductName</th>
+                <th scope="col">CategoryName</th>
+                <th scope="col">QuantityPerUnit</th>
+                <th scope="col">UnitPrice</th>
+                <th scope="col">UnitsInStock</th>
+                <th scope="col">UnitsOnOrder</th>
+                <th scope="col">ReorderLevel</th>
+                <th scope="col">Discontinued</th>
+                <th scope="col" colspan="2">Action</th>
+            </tr>
+        </thead>
+        @foreach (var product in Model.list)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@product.ProductId</th>
+                    <td>@product.ProductName</td>
+                    <td>@product.Category.CategoryName</td>
+                    <td>@product.QuantityPerUnit</td>
+                    <td>@product.UnitPrice</td>
+                    <td>@product.UnitsInStock</td>
+                    <td>@product.UnitsOnOrder</td>
+                    <td>@product.ReorderLevel</td>
+                    @{
+                        if (product.Discontinued == true)
+                        {
+                            <td>In Stock</td>
+                        }
+                        else
+                        {
+                            <td>Out of Stock</td>
+                        }
+                    }
+                    <td>
+                        <a asp-asp-route="Edit" asp-route-id="@product.ProductId">Edit</a>
+                        <a asp-asp-route="delete" asp-route-id="@product.ProductId">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

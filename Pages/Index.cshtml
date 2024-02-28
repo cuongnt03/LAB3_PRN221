@@ -11,7 +11,22 @@
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchString">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <table class="table">
+
+    <label>Filter by Category</label>
+
+    @{
+        foreach (var cate in Model.listCategory)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rdCategory" id="" value="@cate.CategoryId" onclick="updateTable('@cate.CategoryId')">
+                <label class="form-check-label" >
+                    @cate.CategoryName
+                </label>
+            </div>
+        }
+    }
+
+    <table id="productTable" class="table table-hover table-striped table-bordered">
         <thead>
             <tr>
                 <th scope="col">ProductId</th>
@@ -23,8 +38,6 @@
                 <th scope="col">UnitsOnOrder</th>
                 <th scope="col">ReorderLevel</th>
                 <th scope="col">Discontinued</th>
-                <th scope="col">Action</th>
-                <th scope="col">Action</th>
             </tr>
         </thead>
         @foreach (var product in Model.list)
@@ -40,10 +53,11 @@
                     <td>@product.UnitsOnOrder</td>
                     <td>@product.ReorderLevel</td>
                     <td>@product.Discontinued</td>
-                    <td><button><a href="/admin/products/edit/@product.ProductId">Edit</a></button></td>
-                    <td><button><a href="/admin/products/delete/@product.ProductId">Delete</a></button></td>
                 </tr>
             </tbody>
         }
-        </table>
+    </table>
+
+    <script>
+    </script>
 </div>
