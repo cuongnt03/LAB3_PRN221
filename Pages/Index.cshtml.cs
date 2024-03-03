@@ -14,7 +14,6 @@ namespace LAB3.Pages
         public IndexModel(SE1710_DBContext dbContext)
         {
             dataContext = dbContext;
-
         }
 
         public IActionResult OnGet(int? id)
@@ -27,9 +26,21 @@ namespace LAB3.Pages
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int? id)
         {
             string result = Request.Form["searchString"];
+            string? x = Request.Form["rdCategory"].ToString();
+            if (x.Equals("All"))
+            {
+                list = dataContext.Products.Include(p => p.Category).Where(p => p.ProductName.ToLower().Contains(result.ToLower())).ToList();
+                ViewData["check"] = "All";
+            }
+            else
+            {
+                list = dataContext.Products.Include(p => p.Category).Where(p => p.ProductName.ToLower().Contains(result.ToLower()) && p.CategoryId.ToString().Equals(x)).ToList();
+                ViewData["check"] = x.ToString();
+            }
+
             list = dataContext.Products.Where(e => e.ProductName.ToLower().Contains(result.ToLower())).ToList();
             return Page();
         }

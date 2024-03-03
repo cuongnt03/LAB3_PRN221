@@ -7,21 +7,24 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <form method="post" class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchString">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    @* <form method="post" class="form-inline my-2 my-lg-0"> *@
+    <input class="search" type="search" placeholder="Search" id="search" aria-label="Search" name="searchString">
+    @* <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> *@
+    @* </form> *@
 
     <label>Filter by Category</label>
 
+    <input class="category" type="radio" name="rdCategory" id="" value="" />
+    <label class="form-check-label" for="">
+        All
+    </label>
     @{
         foreach (var cate in Model.listCategory)
         {
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="rdCategory" id="" value="@cate.CategoryId" onclick="updateTable('@cate.CategoryId')">
-                <label class="form-check-label" >
+                <input class="category" type="radio" name="rdCategory" id="@cate.CategoryId" value="@cate.CategoryName">
+                <label class="form-check-label" for="@cate.CategoryId">
                     @cate.CategoryName
-                </label>
             </div>
         }
     }
@@ -42,10 +45,10 @@
         </thead>
         @foreach (var product in Model.list)
         {
-            <tbody>
+            <tbody id="productTableBody">
                 <tr>
                     <th scope="row">@product.ProductId</th>
-                    <td>@product.ProductName</td>
+                    <td class="name">@product.ProductName</td>
                     <td>@product.Category.CategoryName</td>
                     <td>@product.QuantityPerUnit</td>
                     <td>@product.UnitPrice</td>
@@ -57,7 +60,4 @@
             </tbody>
         }
     </table>
-
-    <script>
-    </script>
 </div>

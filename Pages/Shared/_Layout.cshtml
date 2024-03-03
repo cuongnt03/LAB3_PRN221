@@ -45,7 +45,41 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () 
+        {
+            $('.search').on('keyup', function () 
+            {
+                var datasearch = $(this).val().toLowerCase();
+                $('#productTable tbody').each(function () 
+                {
+                    var stringdata = $(this).text().toLowerCase();
+                    if (stringdata.indexOf(datasearch) === -1) 
+                    {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+        $(document).ready(function () {
+            $('.category').on('change', function () {
+                var datasearch = $(this).val().toLowerCase();
+                $('#productTable tbody').each(function () {
+                    var stringdata = $(this).text().toLowerCase();
+                    if (stringdata.indexOf(datasearch) === -1) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
+
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
