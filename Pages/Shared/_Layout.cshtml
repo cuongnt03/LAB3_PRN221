@@ -49,49 +49,31 @@
 
     <script>
         $(document).ready(function () {
-            $('.search, .category').on('keyup change', function () 
-            {
+            $('.search, .category').on('keyup change', function () {
                 var searchData = $('.search').val().toLowerCase();
-                var categoryData = $('.category:checked').map(function () 
-                {
+                var categoryData = $('.category:checked').map(function () {
                     return $(this).val().toLowerCase();
-                });//.get();
+                }).get();
 
-                $('#productTable tbody').each(function () 
-                {
-                    var rowData = $(this).text().toLowerCase()//.find('.nameColumn').text().toLowerCase();
+                $('#productTable tbody tr').each(function () {
+                    var productName = $(this).find('.productName').text().toLowerCase(); 
                     var showRow = true;
-                    if (searchData !== '') 
-                    {
-                        if (rowData.indexOf(searchData) === -1) 
-                        {
+
+                    if (searchData !== '' && productName.indexOf(searchData) === -1) {
+                        showRow = false;
+                    }
+
+                    if (categoryData.length > 0) {
+                        var foundInCategory = categoryData.some(function (category) {
+                            return $(this).text().toLowerCase().includes(category);
+                        }.bind(this));
+
+                        if (!foundInCategory) {
                             showRow = false;
                         }
                     }
-                    if (categoryData.length > 0) 
-                    {
-                        var foundInCategory = false;
-                        for (var i = 0; i < categoryData.length; i++) 
-                        {
-                            if (rowData.indexOf(categoryData[i]) !== -1) 
-                            {
-                                foundInCategory = true;
-                                break;
-                            }
-                        }
-                        if (!foundInCategory) 
-                        {
-                            showRow = false;
-                        }
-                    }
-                    if (showRow) 
-                    {
-                        $(this).show();
-                    } 
-                    else 
-                    {
-                        $(this).hide();
-                    }
+
+                    $(this).toggle(showRow);
                 });
             });
         });

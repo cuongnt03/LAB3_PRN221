@@ -6,13 +6,14 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     @* <form method="post" class="form-inline my-2 my-lg-0"> *@
     <input class="search" type="search" placeholder="Search" id="search" aria-label="Search" name="searchString">
+    <br />
     @* <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> *@
     @* </form> *@
 
     <label>Filter by Category</label>
+    <br />
 
     <input class="category" type="radio" name="rdCategory" id="" value="" />
     <label class="form-check-label" for="">
@@ -25,6 +26,7 @@
                 <input class="category" type="radio" name="rdCategory" id="@cate.CategoryId" value="@cate.CategoryName">
                 <label class="form-check-label" for="@cate.CategoryId">
                     @cate.CategoryName
+                </label>
             </div>
         }
     }

@@ -1,4 +1,14 @@
 ﻿@{
-    Layout = "_Layout";
+    var path = Context.Request.Path.Value;
 
+    if (path.Contains("/".ToLower()))
+    {
+        Layout = "_Layout";
+        Console.WriteLine("user");
+
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
 }
