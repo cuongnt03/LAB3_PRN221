@@ -48,32 +48,49 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-        $(document).ready(function () 
-        {
-            $('.search').on('keyup', function () 
+        $(document).ready(function () {
+            $('.search, .category').on('keyup change', function () 
             {
-                var datasearch = $(this).val().toLowerCase();
+                var searchData = $('.search').val().toLowerCase();
+                var categoryData = $('.category:checked').map(function () 
+                {
+                    return $(this).val().toLowerCase();
+                });//.get();
+
                 $('#productTable tbody').each(function () 
                 {
-                    var stringdata = $(this).text().toLowerCase();
-                    if (stringdata.indexOf(datasearch) === -1) 
+                    var rowData = $(this).text().toLowerCase()//.find('.nameColumn').text().toLowerCase();
+                    var showRow = true;
+                    if (searchData !== '') 
+                    {
+                        if (rowData.indexOf(searchData) === -1) 
+                        {
+                            showRow = false;
+                        }
+                    }
+                    if (categoryData.length > 0) 
+                    {
+                        var foundInCategory = false;
+                        for (var i = 0; i < categoryData.length; i++) 
+                        {
+                            if (rowData.indexOf(categoryData[i]) !== -1) 
+                            {
+                                foundInCategory = true;
+                                break;
+                            }
+                        }
+                        if (!foundInCategory) 
+                        {
+                            showRow = false;
+                        }
+                    }
+                    if (showRow) 
+                    {
+                        $(this).show();
+                    } 
+                    else 
                     {
                         $(this).hide();
-                    } else {
-                        $(this).show();
-                    }
-                });
-            });
-        });
-        $(document).ready(function () {
-            $('.category').on('change', function () {
-                var datasearch = $(this).val().toLowerCase();
-                $('#productTable tbody').each(function () {
-                    var stringdata = $(this).text().toLowerCase();
-                    if (stringdata.indexOf(datasearch) === -1) {
-                        $(this).hide();
-                    } else {
-                        $(this).show();
                     }
                 });
             });
